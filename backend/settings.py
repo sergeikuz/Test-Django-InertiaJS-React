@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend.app',
+    'inertia',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'inertia.middleware.InertiaMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -121,3 +123,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Inertia settings
+INERTIA_LAYOUT = BASE_DIR / "templates" / "index.html"
+CSRF_HEADER_NAME = 'HTTP_X_XSRF_TOKEN'
+CSRF_COOKIE_NAME = 'XSRF-TOKEN'
