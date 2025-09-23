@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from inertia import render
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the app index.")
-# Create your views here.
+    return render(request, "Index", props={"description": "Демо Django + InertiaJS + React"})
+
+
+def about(request):
+    return render(request, "About", props={"description": "Демо Django + InertiaJS + React, для лучшего понимания SPAшки"})
