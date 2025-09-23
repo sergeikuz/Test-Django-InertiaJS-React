@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_vite',
     'backend.app',
     'inertia',
 ]
@@ -122,7 +124,25 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DJANGO_VITE_DEV_MODE = DEBUG  # DEBUG - follow Django's dev mode
+
+# Where ViteJS assets are built.
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "frontend" / "static" / "dist"
+
+# Vite 3 defaults to 5173. Default for django-vite is 3000, which is the default for Vite 2.
+DJANGO_VITE_DEV_SERVER_PORT = 5173
+
+# Output directory for collectstatic to put all your static files into.
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+DJANGO_VITE_MANIFEST_PATH = os.path.join(STATIC_ROOT, "manifest.json")
+
+# Include DJANGO_VITE_ASSETS_PATH into STATICFILES_DIRS to be copied inside
+# when run command python manage.py collectstatic
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
+
 # Inertia settings
 INERTIA_LAYOUT = BASE_DIR / "templates" / "index.html"
 CSRF_HEADER_NAME = 'HTTP_X_XSRF_TOKEN'
