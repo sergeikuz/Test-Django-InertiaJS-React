@@ -52,6 +52,7 @@ yarn-error.log*
 # Vite/React/Node
 node_modules/
 /dist/
+frontend/static/dist/
 static/dist/
 /static/dist/
 /.env
