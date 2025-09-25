@@ -1,34 +1,19 @@
-import { resolve }  from 'path';
+import { defineConfig } from "vite";
+import { resolve } from "path";
+import react from "@vitejs/plugin-react";
 
-module.exports = {
- plugins: [],
- root: resolve('src'),
- base: '/static/',
- server: {
-   host: 'localhost',
-   port: 3000,
-   open: false,
-   watch: {
-     usePolling: true,
-     disableGlobbing: false,
-   },
- },
- resolve: {
-   extensions: ['.js', '.json'],
- },
- build: {
-   outDir: resolve('static/dist'),
-   assetsDir: '',
-   manifest: true,
-   emptyOutDir: true,
-   target: 'es2015',
-   rollupOptions: {
-     input: {
-       main: resolve('src/main.js'),
-     },
-     output: {
-       chunkFileNames: undefined,
-     },
-   },
- },
-};
+export default defineConfig({
+  root: resolve("src"),
+  base: "/static/",
+  plugins: [react()],
+  build: {
+    outDir: resolve("static/dist"),
+    assetsDir: "",
+    manifest: "manifest.json",
+    emptyOutDir: true,
+    rollupOptions: {
+      // Overwrite default .html entry to main.tsx in the static directory
+      input: resolve("src/main.tsx"),
+    },
+  },
+});
